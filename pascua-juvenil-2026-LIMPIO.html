@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ffffff">
+<title>Pascua Juvenil 2026 · Primer Sagrario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#f5a623;--orange-dark:#e8870a;--yellow:#f9c22e;
+  --teal:#2177a0;--teal-light:#2a9acc;--purple:#3d2060;
+  --blue-ps:#1a4fa0;--bg:#fff;--surface:#f7f7f5;--surface2:#eeecea;
+  --border:#e2ddd6;--text:#1a1a1a;--text2:#555;--text3:#888;
+  --radius:16px;--radius-sm:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{background:#fff;color:var(--text);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden;}
+.cintillo-img{width:100%; display:block; height:32px; object-fit:cover; object-position:top;}
+.view{display:none;min-height:100vh;flex-direction:column;background:#fff;}
+.view.active{display:flex;}
+/* SPLASH */
+.splash-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:1rem 1.25rem 0.75rem;justify-content:center;}
+.pascua-logo-wrap{width:100%;max-width:200px;margin-bottom:0.75rem;}
+.pascua-logo-wrap img{width:100%;height:auto;display:block;}
+.bottom-logos{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1.25rem;width:100%;max-width:300px;}
+.bottom-logos img.logo-ps{height:60px;width:auto;}
+.bottom-logos img.logo-cv{height:48px;width:auto;}
+.logos-divider{width:1px;height:44px;background:var(--border);flex-shrink:0;}
+.splash-invite-main{font-size:1rem;font-weight:800;color:var(--text);line-height:1.3;}
+.splash-invite-sub{font-size:0.85rem;font-weight:600;color:var(--text2);}
+.moment-cards{display:flex;flex-direction:column;gap:0.85rem;width:100%;max-width:360px;}
+.moment-card{background:#fff;border-radius:var(--radius);padding:1.15rem 1.2rem;cursor:pointer;transition:transform 0.13s,box-shadow 0.13s;text-align:left;display:flex;align-items:center;gap:0.85rem;border:2px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.moment-card:active{transform:scale(0.97);}
+.moment-card.adoracion{border-color:var(--teal);}
+.moment-card.misa{border-color:var(--orange);}
+.moment-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ic-adoracion{background:linear-gradient(135deg,var(--teal),var(--teal-light));}
+.ic-misa{background:linear-gradient(135deg,var(--orange-dark),var(--yellow));}
+.moment-icon svg{width:26px;height:26px;}
+.moment-info{flex:1;}
+.moment-name{font-size:1rem;font-weight:800;color:var(--text);margin-bottom:0.15rem;line-height:1.2;}
+.moment-count{font-size:0.75rem;color:var(--text3);font-weight:600;}
+.moment-arrow{font-size:1.5rem;font-weight:900;}
+.moment-card.adoracion .moment-arrow{color:var(--teal);}
+.moment-card.misa .moment-arrow{color:var(--orange);}
+.splash-footer{padding:1rem 1rem 0.75rem;text-align:center;font-size:0.68rem;color:var(--text3);font-weight:700;border-top:1px solid var(--border);letter-spacing:0.03em;line-height:1.6;}
+/* LIST */
+.list-header{background:#fff;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.list-header-main{display:flex;align-items:center;gap:0.6rem;padding:0.85rem 1rem 0.75rem;}
+.back-btn{background:var(--surface);border:1.5px solid var(--border);color:var(--text);cursor:pointer;padding:5px 11px;font-size:1.15rem;line-height:1;border-radius:var(--radius-sm);font-weight:800;flex-shrink:0;}
+.list-title-wrap{flex:1;min-width:0;}
+.list-title{font-size:0.95rem;font-weight:800;color:var(--text);line-height:1.2;}
+.list-subtitle{font-size:0.68rem;color:var(--text3);font-weight:600;}
+.list-header-logo{height:36px;width:auto;border-radius:50%;flex-shrink:0;}
+.progress-wrap{padding:0 1rem 0.75rem;}
+.progress-bar{height:6px;background:var(--surface2);border-radius:6px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:6px;transition:width 0.4s;width:0%;}
+.pf-adoracion{background:linear-gradient(90deg,var(--teal),var(--teal-light));}
+.pf-misa{background:linear-gradient(90deg,var(--orange-dark),var(--yellow));}
+.progress-label{font-size:0.65rem;font-weight:800;color:var(--text3);text-align:right;margin-top:3px;}
+.songs-container{flex:1;padding:0.25rem 0 5rem;}
+.song-item{display:flex;align-items:center;padding:0.85rem 1rem;gap:0.85rem;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.1s;background:#fff;}
+.song-item:active{background:var(--surface);}
+.song-item.done{background:#f5fdf7;}
+.song-num{font-size:0.72rem;font-weight:900;color:var(--border);width:20px;text-align:center;flex-shrink:0;}
+.song-item.done .song-num{color:var(--orange);}
+.song-info{flex:1;min-width:0;}
+.song-title-sm{font-size:1rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.song-artist-sm{font-size:0.75rem;color:var(--text3);font-style:italic;font-weight:600;}
+.song-badge{font-size:0.58rem;padding:3px 7px;border-radius:20px;font-weight:900;letter-spacing:0.04em;white-space:nowrap;flex-shrink:0;text-transform:uppercase;}
+.badge-adoracion{background:rgba(33,119,160,0.1);color:var(--teal);}
+.badge-misa{background:rgba(245,166,35,0.12);color:var(--orange-dark);}
+.song-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:11px;font-weight:900;color:transparent;}
+.song-item.done .song-check{background:var(--orange);border-color:var(--orange);color:#fff;}
+/* SONG VIEW */
+#song-view{background:#fff;}
+.song-header{background:#fff;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.song-header-main{display:flex;align-items:flex-start;gap:0.6rem;padding:0.85rem 1rem 0.5rem;}
+.song-meta{flex:1;min-width:0;}
+.song-badge-view{display:inline-block;font-size:0.58rem;padding:2px 8px;border-radius:20px;font-weight:900;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0.3rem;}
+.song-title-lg{font-size:1.05rem;font-weight:800;color:var(--text);line-height:1.25;}
+.song-artist-tag{font-size:0.73rem;color:var(--text3);font-style:italic;font-weight:600;margin-top:0.1rem;display:block;}
+.song-nav{display:flex;gap:0.5rem;align-items:center;padding:0 1rem 0.75rem;}
+.nav-btn{background:var(--surface);border:1.5px solid var(--border);color:var(--text);cursor:pointer;padding:7px 14px;border-radius:var(--radius-sm);font-size:0.82rem;font-family:'Nunito',sans-serif;font-weight:700;transition:all 0.13s;flex:1;text-align:center;}
+.nav-btn:active{transform:scale(0.97);}
+.nav-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.next-adoracion{background:rgba(33,119,160,0.08);border-color:var(--teal);color:var(--teal);}
+.next-misa{background:rgba(245,166,35,0.1);border-color:var(--orange);color:var(--orange-dark);}
+.song-counter{font-size:0.72rem;font-weight:800;color:var(--text3);text-align:center;min-width:44px;}
+/* LYRICS */
+.lyrics-body{padding:1.5rem 1.25rem 7rem;font-size:1.1rem;line-height:1.9;color:var(--text);overflow-y:auto;height:calc(100vh - 160px);}
+.lyric-section{margin-bottom:1.4rem;}
+.lyric-section-label{font-size:0.6rem;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.4rem;display:block;}
+.lsl-misa{color:var(--orange-dark);}.lsl-adoracion{color:var(--teal);}
+.lyric-line{display:block;margin-bottom:0.05rem;}
+.lyric-line.bold{font-weight:800;}
+.lyric-line.italic{font-style:italic;color:var(--text2);}
+.lyric-sep{display:flex;align-items:center;gap:0.5rem;margin:1.2rem 0;}
+.lyric-sep::before,.lyric-sep::after{content:'';flex:1;height:1.5px;background:var(--border);border-radius:2px;}
+.lyric-sep-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.dot-misa{background:var(--yellow);}.dot-adoracion{background:var(--teal-light);}
+.note-box{border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.6rem 0.9rem;margin-bottom:1.2rem;font-size:0.82rem;font-weight:700;font-style:italic;}
+.note-misa{background:rgba(245,166,35,0.08);border-left:3px solid var(--orange);color:var(--orange-dark);}
+.note-adoracion{background:rgba(33,119,160,0.07);border-left:3px solid var(--teal);color:var(--teal);}
+.bilingual-block{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;background:var(--surface);border-radius:var(--radius);padding:1rem;margin-bottom:1.5rem;font-size:0.9rem;line-height:1.8;border:1px solid var(--border);}
+.lang-label{font-size:0.58rem;font-weight:900;letter-spacing:0.15em;color:var(--text3);text-transform:uppercase;display:block;margin-bottom:0.35rem;}
+/* READ PROGRESS */
+.read-progress-bar{position:fixed;bottom:0;left:0;right:0;height:4px;background:var(--surface2);z-index:30;}
+.read-progress-fill{height:100%;width:0%;transition:width 0.15s;}
+.rpf-misa{background:var(--orange);}.rpf-adoracion{background:var(--teal);}
+/* MARK CTA */
+.mark-cta{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);z-index:20;display:none;}
+.mark-cta.visible{display:block;}
+.mark-btn{display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:40px;border:none;font-family:'Nunito',sans-serif;font-size:0.85rem;font-weight:800;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,0.15);transition:all 0.15s;white-space:nowrap;letter-spacing:0.02em;}
+.mark-btn:active{transform:scale(0.96);}
+.mb-misa{background:var(--orange);color:#fff;}
+.mb-adoracion{background:var(--teal);color:#fff;}
+.mb-done{background:var(--surface2);color:var(--text3);box-shadow:none;}
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div class="view active" id="splash">
+<img class="cintillo-img" src="images/Cintillo.png" alt="">
+  <div class="splash-body">
+    <div class="pascua-logo-wrap">
+      <img src="images/PascuaJuvenil.png">
+    </div>
+    <div class="bottom-logos">
+      <img src="images/PrimerSagrario.jpg">
+      <div class="logos-divider"></div>
+      <img src="CristoViveynosLlama.png">
+    </div>
+    <div class="splash-invite">
+      <p class="splash-invite-main">Acompáñanos en la celebración</p>
+      <p class="splash-invite-sub">siguiendo los cantos del repertorio</p>
+    </div>
+    <div class="moment-cards">
+      <div class="moment-card adoracion" onclick="openSection('adoracion')">
+        <div class="moment-icon ic-adoracion">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+            <path d="M12 3l1.5 4.5H18l-3.75 2.7 1.5 4.5L12 12.5l-3.75 2.2 1.5-4.5L6 7.5h4.5z"/>
+            <circle cx="12" cy="20" r="1.5" fill="white" stroke="none"/>
+          </svg>
+        </div>
+        <div class="moment-info">
+          <p class="moment-name">Adoración Eucarística</p>
+          <p class="moment-count">10 cantos · Santísimo</p>
+        </div>
+        <span class="moment-arrow">›</span>
+      </div>
+      <div class="moment-card misa" onclick="openSection('misa')">
+        <div class="moment-icon ic-misa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+            <path d="M12 2v20M2 12h20"/>
+            <circle cx="12" cy="12" r="2.5" fill="white" stroke="none"/>
+          </svg>
+        </div>
+        <div class="moment-info">
+          <p class="moment-name">Santa Misa</p>
+          <p class="moment-count">11 cantos · Hora Santa</p>
+        </div>
+        <span class="moment-arrow">›</span>
+      </div>
+    </div>
+  </div>
+  <!-- CINTILLO INFERIOR -->
+  <img class="cintillo-img" src="images/Cintillo.png" alt="">
+  <div class="splash-footer">
+    Coro Juvenil Primer Sagrario · Pastoral Juvenil<br>
+    Catedral Metropolitana · Decanato 1 · Guatemala 2026 · @catedral.metropolitana
+  </div>
+</div>
+
+<!-- SONG LIST -->
+<div class="view" id="song-list">
+  <div class="list-header">
+    <img class="cintillo-img" src="images/Cintillo.png" alt="">
+    <div class="list-header-main">
+      <button class="back-btn" onclick="goHome()">‹</button>
+      <div class="list-title-wrap">
+        <p class="list-title" id="list-title"></p>
+        <p class="list-subtitle" id="list-subtitle"></p>
+      </div>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <p class="progress-label" id="progress-label"></p>
+  </div>
+  <div class="songs-container" id="songs-container"></div>
+</div>
+
+<!-- SONG VIEW -->
+<div class="view" id="song-view">
+  <div class="song-header">
+    <img class="cintillo-img" src="images/Cintillo.png" alt="">
+    <div class="song-header-main">
+      <button class="back-btn" onclick="goList()">‹</button>
+      <div class="song-meta">
+        <span class="song-badge-view" id="view-badge"></span>
+        <p class="song-title-lg" id="view-title"></p>
+        <span class="song-artist-tag" id="view-artist"></span>
+      </div>
+    </div>
+    <div class="song-nav">
+      <button class="nav-btn" id="prev-btn" onclick="prevSong()">‹ Anterior</button>
+      <span class="song-counter" id="song-counter"></span>
+      <button class="nav-btn" id="next-btn" onclick="nextSong()">Siguiente ›</button>
+    </div>
+  </div>
+  <div class="lyrics-body" id="lyrics-body" onscroll="onLyricsScroll()"></div>
+  <div class="read-progress-bar"><div class="read-progress-fill" id="read-progress-fill"></div></div>
+</div>
+
+<!-- MARK CTA -->
+<div class="mark-cta" id="mark-cta">
+  <button class="mark-btn" id="mark-btn" onclick="toggleDone()">
+    <span id="mark-btn-icon">♪</span>
+    <span id="mark-btn-label">Marcar como cantado</span>
+  </button>
+</div>
+
+<script>
+const SONGS = {
+  adoracion: [
+    {title:"Cantemos al Amor de los amores",artist:"Himno Eucarístico",badge:"Exposición",lyrics:`<div class="note-box note-adoracion">✦ Exposición del Santísimo</div><div class="lyric-section"><span class="lyric-line">Cantemos al amor de los amores,</span><span class="lyric-line">cantemos al Señor,</span><span class="lyric-line">Dios está aquí, venid adoradores adoremos</span><span class="lyric-line">a Cristo Redentor.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-adoracion">Estribillo</span><span class="lyric-line bold">Gloria a Cristo Jesús,</span><span class="lyric-line bold">cielos y tierra bendecid al Señor;</span><span class="lyric-line bold">honor y gloria a Ti,</span><span class="lyric-line bold">Rey de la gloria, amor por siempre a Ti,</span><span class="lyric-line bold">Dios del amor.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Unamos nuestra voz a los cantares</span><span class="lyric-line">del coro celestial;</span><span class="lyric-line">Dios está aquí;</span><span class="lyric-line">al Dios de los altares alabemos</span><span class="lyric-line">con gozo angelical.</span></div>`},
+    {title:"Alabemos al Santísimo",artist:"Canto Tradicional",badge:"Adoración",lyrics:`<div class="lyric-section"><span class="lyric-section-label lsl-adoracion">Estribillo</span><span class="lyric-line bold">Alabemos al Santísimo</span><span class="lyric-line bold">Sacramento del altar,</span><span class="lyric-line bold">y a María, concebida</span><span class="lyric-line bold">sin pecado original.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-adoracion">1</span><span class="lyric-line">Vuestro cuerpo sacrosanto</span><span class="lyric-line">benignísimo Señor,</span><span class="lyric-line">prenda sea que nos una</span><span class="lyric-line">hasta la eternidad.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-adoracion">2</span><span class="lyric-line">Vuestro cuerpo sacrosanto</span><span class="lyric-line">es del cielo rico don;</span><span class="lyric-line">es de fuertes: alimento;</span><span class="lyric-line">es de débiles: vigor.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-adoracion">3</span><span class="lyric-line">Oh cristianos que dulzura</span><span class="lyric-line">halla el alma en visitar</span><span class="lyric-line">a Jesús que con ternura</span><span class="lyric-line">nos da audiencia en el altar.</span></div>`},
+    {title:"Tan cerca de mí",artist:"Luis Alfredo Díaz",badge:"Adoración",lyrics:`<div class="lyric-section"><span class="lyric-section-label lsl-adoracion">Estribillo</span><span class="lyric-line bold">Tan cerca de mí,</span><span class="lyric-line bold">tan cerca de mí,</span><span class="lyric-line bold">que hasta lo puedo tocar,</span><span class="lyric-line bold">Jesús está aquí.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Le hablaré sin miedo al oído,</span><span class="lyric-line">le contaré las cosas que hay en mí;</span><span class="lyric-line">y que solo a Él le interesarán,</span><span class="lyric-line">Él es más que un mito para mí…</span><span class="lyric-line italic">Tan cerca de ti…</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">No busques a Cristo en lo alto,</span><span class="lyric-line">ni lo busques en la oscuridad;</span><span class="lyric-line">muy cerca de ti, en tu corazón,</span><span class="lyric-line">puedes adorar a tu Señor…</span><span class="lyric-line italic">Tan cerca de mí…</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Míralo a tu lado caminando,</span><span class="lyric-line">paseando entre la multitud;</span><span class="lyric-line">muchos ciegos son, porque no lo ven,</span><span class="lyric-line">ciegos de ceguera espiritual…</span><span class="lyric-line italic">Tan cerca de mí…</span></div>`},
+    {title:"Te alabo en verdad",artist:"Martín Valverde",badge:"Adoración",lyrics:`<div class="lyric-section"><span class="lyric-line">Aún en la tormenta,</span><span class="lyric-line">aun cuando arrecia el mar,</span><span class="lyric-line">te alabo, te alabo en verdad.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Aún lejos de los míos,</span><span class="lyric-line">aún en mi soledad,</span><span class="lyric-line">te alabo, te alabo en verdad.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-adoracion">Estribillo</span><span class="lyric-line bold">Pues sólo a ti te tengo,</span><span class="lyric-line bold">pues tú eres mi heredad</span><span class="lyric-line bold">Te alabo, te alabo en verdad.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Pues sólo a ti te tengo, Señor,</span><span class="lyric-line">pues tú eres mi heredad</span><span class="lyric-line">Te alabo, te alabo en verdad.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Aún en la tormenta,</span><span class="lyric-line">aun cuando arrecia el mar,</span><span class="lyric-line bold">te alabo, te alabo en verdad.</span></div>`},
+    {title:"Gloria a Jesús el Señor",artist:"Martín Valverde",badge:"Adoración",lyrics:`<div class="lyric-section" style="text-align:center"><span class="lyric-line bold" style="font-size:1.5rem">Gloria, Gloria,</span><span class="lyric-line bold" style="font-size:1.5rem">Gloria, Gloria,</span><span class="lyric-line bold">a Jesús el Señor,</span><span class="lyric-line bold">al Cordero de Dios.</span><span class="lyric-line">Al nombre sobre todo nombre.</span><span class="lyric-line">a Jesús el Señor,</span><span class="lyric-line">al Cordero de Dios.</span><span class="lyric-line">Al nombre sobre todo nombre.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section" style="text-align:center"><span class="lyric-line bold" style="font-size:1.5rem">Gloria, Gloria,</span><span class="lyric-line bold" style="font-size:1.5rem">Gloria, Gloria,</span><span class="lyric-line bold">a Jesús el Señor,</span><span class="lyric-line bold">al Cordero de Dios.</span><span class="lyric-line">Al nombre sobre todo nombre.</span><span class="lyric-line italic">nombre sobre todo nombre.</span><span class="lyric-line italic">nombre sobre todo…</span></div>`},
+    {title:"Ya no eres pan y vino",artist:"JL Bohórquez",badge:"Adoración",lyrics:`<div class="lyric-section"><span class="lyric-line">Ya no eres pan ni vino</span><span class="lyric-line">Ahora que eres cuerpo y sangre vives en mi</span><span class="lyric-line">Y de rodillas yo caigo al contemplar tu bondad</span><span class="lyric-line italic">¿Cómo no te voy a adorar?</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Mientras te pierdes en mis labios</span><span class="lyric-line">Tu gracia va inundando todo mi corazón</span><span class="lyric-line">Por esa paz que me llena de alegría mi ser</span><span class="lyric-line italic">¿Cómo no te voy a adorar?</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-adoracion">Estribillo</span><span class="lyric-line bold">Señor Jesús, mi Salvador</span><span class="lyric-line bold">Amor eterno, amor divino</span><span class="lyric-line bold">Ya no falta nada, lo tengo todo</span><span class="lyric-line bold">Te tengo a ti</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Dueño y Rey del universo</span><span class="lyric-line">¿Cómo puede ser posible que busques mi amor?</span><span class="lyric-line">Tú tan grande y yo pequeño y te fijas en mí</span><span class="lyric-line italic">¿Cómo no te voy a adorar?</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">De rodillas yo te pido</span><span class="lyric-line">Que el día cuando Tú me llames sea como hoy</span><span class="lyric-line">Para mirarte a los ojos y poderte decir</span><span class="lyric-line italic">¿Cómo no te voy a adorar?</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line bold">Ya no falta nada, lo tengo todo</span><span class="lyric-line bold">Te tengo a ti.</span></div>`},
+    {title:"Bendito sea Dios",artist:"Luispo · Servus Mariae",badge:"Meditación",lyrics:`<div class="lyric-section"><span class="lyric-line bold">Bendito sea Dios.</span><span class="lyric-line">Bendito sea su Santo Nombre.</span><span class="lyric-line">Bendito sea Jesucristo, Dios y Hombre verdadero.</span><span class="lyric-line">Bendito sea el Nombre de Jesús.</span><span class="lyric-line">Bendito sea su Sacratísimo Corazón.</span><span class="lyric-line">Bendita sea su Preciosísima Sangre.</span><span class="lyric-line">Bendito sea Jesús en el Santísimo Sacramento del Altar.</span><span class="lyric-line">Bendito sea el Espíritu Santo Paráclito.</span><span class="lyric-line">Bendita sea la excelsa Madre de Dios, María Santísima.</span><span class="lyric-line">Bendita sea su Santa e Inmaculada Concepción.</span><span class="lyric-line">Bendita sea su Gloriosa Asunción.</span><span class="lyric-line">Bendito sea el nombre de María, Virgen y Madre.</span><span class="lyric-line">Bendito sea San José, su castísimo Esposo.</span><span class="lyric-line">Bendito sea Dios en sus Ángeles y en sus Santos.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line bold">¡Bendito sea Dios! ¡Bendito sea Dios!</span><span class="lyric-line bold">¡Bendito sea Dios! ¡Bendito sea Dios!</span></div>`},
+    {title:"Recíbeme",artist:"Jaleo",badge:"Adoración",lyrics:`<div class="lyric-section"><span class="lyric-section-label lsl-adoracion">Estribillo</span><span class="lyric-line bold">Recíbeme con toda la miseria que hay en mí</span><span class="lyric-line bold">con todos los deseos de seguir</span><span class="lyric-line bold">por tu camino.</span><span class="lyric-line bold">Iluminar es hoy el reto en la oscuridad</span><span class="lyric-line bold">servicio, entrega en fidelidad</span><span class="lyric-line bold">hasta la muerte.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Hoy es tiempo de dar</span><span class="lyric-line">a manos llenas lo que se nos dio,</span><span class="lyric-line">brillar hasta consumirse,</span><span class="lyric-line">iluminar a un mundo en penumbras</span><span class="lyric-line">hasta que no quede yo, sino Tú.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">No se enciende una lámpara</span><span class="lyric-line">para ponerla bajo el celemín</span><span class="lyric-line">la luz que encendiste en mí</span><span class="lyric-line">la ponga yo en lo alto</span><span class="lyric-line">y que María me ayude a decir Sí.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line bold">Recíbeme, Recíbeme</span></div>`},
+    {title:"Déjate",artist:"Misión País",badge:"Adoración",lyrics:`<div class="lyric-section"><span class="lyric-line">Hace ya tiempo que comprendí</span><span class="lyric-line">Tú me buscaste en todas partes</span><span class="lyric-line">La llama que un día empezó a fallar</span><span class="lyric-line">Tú no dejaste se apagase</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Yo no comprendo y digo ¿Qué será?</span><span class="lyric-line">¿Será que estaba equivocada?</span><span class="lyric-line">Y he descubierto que este loco está</span><span class="lyric-line">De amor muriendo porque le ame</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-adoracion">Coro (voz de Dios)</span><span class="lyric-line bold">"Déjate, que te consuma este fuego</span><span class="lyric-line bold">No apagues ya más a esta hoguera</span><span class="lyric-line bold">Que si no hay fuego no habrá luz"</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line bold">"Créeme que estoy clavado porque te amo</span><span class="lyric-line bold">No encontrarás en otro lado</span><span class="lyric-line bold">Quien quiera ya morir por ti"</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line bold">"No tengas miedo, no te dejaré</span><span class="lyric-line bold">Las veces que tú me reclames</span><span class="lyric-line bold">Yo gozo al ver que quieres regresar</span><span class="lyric-line bold">Déjame que yo te levante"</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line italic">Señor, no ves que quiero regresar</span><span class="lyric-line italic">Pero me pesa mi pasado…</span><span class="lyric-line italic">Tanto he besado el suelo, ¿no lo ves?</span><span class="lyric-line italic">Mis manos se han cerrado tanto</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line bold">"No te preocupes, te rescataré</span><span class="lyric-line bold">Mi vida a cambio por la tuya"</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line bold">"Déjate, que te consuma este fuego</span><span class="lyric-line bold">No apagues ya más a esta hoguera</span><span class="lyric-line bold">Que yo encendí en tu corazón."</span></div>`},
+    {title:"Humildes gracias",artist:"Reserva del Santísimo",badge:"Cierre",lyrics:`<div class="note-box note-adoracion">✦ Reserva del Santísimo</div><div class="lyric-section"><span class="lyric-line">Humildes gracias, Dios mío,</span><span class="lyric-line">por el tiempo que pasé</span><span class="lyric-line">en tu presencia adorando</span><span class="lyric-line">y en tu amor me sumergé.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-adoracion"></div></div><div class="lyric-section"><span class="lyric-line">Mi alma quedó saciada</span><span class="lyric-line">de tu gracia y tu poder,</span><span class="lyric-line">y aunque me vaya de aquí</span><span class="lyric-line">contigo voy a volver.</span></div>`}
+  ],
+  misa: [
+    {title:"Venid, Cristianos",artist:"Himno de Entrada",badge:"Entrada",lyrics:`<div class="note-box note-misa">✦ Procesión de Entrada</div><div class="lyric-section"><span class="lyric-line">Venid, cristianos, venid a cantar</span><span class="lyric-line">la gloria de Cristo, nuestro Redentor;</span><span class="lyric-line">venid, cristianos, venid a adorar</span><span class="lyric-line">al Rey de la gloria, nuestro Señor.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-misa">Estribillo</span><span class="lyric-line bold">Gloria, gloria, gloria</span><span class="lyric-line bold">al Redentor;</span><span class="lyric-line bold">gloria, gloria, gloria</span><span class="lyric-line bold">al Señor.</span></div>`},
+    {title:"Kyrie, eleison",artist:"Canto Litúrgico",badge:"Penitencial",lyrics:`<div class="lyric-section"><span class="lyric-line bold">Kyrie, eleison.</span><span class="lyric-line bold">Kyrie, eleison.</span><span class="lyric-line bold">Christe, eleison.</span><span class="lyric-line bold">Christe, eleison.</span><span class="lyric-line bold">Kyrie, eleison.</span><span class="lyric-line bold">Kyrie, eleison.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line italic">Señor, ten piedad de nosotros.</span><span class="lyric-line italic">Cristo, ten piedad de nosotros.</span><span class="lyric-line italic">Señor, ten piedad de nosotros.</span></div>`},
+    {title:"Gloria a Dios en las alturas",artist:"Himno de Gloria",badge:"Gloria",lyrics:`<div class="lyric-section"><span class="lyric-line bold">Gloria a Dios en las alturas,</span><span class="lyric-line bold">y en la tierra paz</span><span class="lyric-line bold">a los hombres de buena voluntad.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line">Te alabamos, te bendecimos,</span><span class="lyric-line">te adoramos, te glorificamos,</span><span class="lyric-line">te damos gracias por tu gloria inmensa.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line">Señor Dios, Rey celestial,</span><span class="lyric-line">Dios Padre todopoderoso.</span><span class="lyric-line">Señor, Hijo único, Jesucristo.</span><span class="lyric-line">Señor Dios, Cordero de Dios, Hijo del Padre.</span></div>`},
+    {title:"Aleluya",artist:"Aclamación",badge:"Evangelio",lyrics:`<div class="lyric-section" style="text-align:center"><span class="lyric-line bold" style="font-size:1.8rem">Aleluya, Aleluya,</span><span class="lyric-line bold" style="font-size:1.8rem">Aleluya, Aleluya.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section" style="text-align:center"><span class="lyric-line italic">Que el Espíritu Santo ilumine nuestro corazón</span><span class="lyric-line italic">para comprender la Palabra de Dios.</span></div>`},
+    {title:"Santo, Santo, Santo",artist:"Prefacio",badge:"Consagración",lyrics:`<div class="lyric-section"><span class="lyric-line bold">Santo, Santo, Santo</span><span class="lyric-line bold">es el Señor, Dios del universo.</span><span class="lyric-line bold">Llenos están el cielo y la tierra</span><span class="lyric-line bold">de tu gloria.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line bold">Hosanna en el cielo.</span><span class="lyric-line bold">Bendito el que viene en nombre del Señor.</span><span class="lyric-line bold">Hosanna en el cielo.</span></div>`},
+    {title:"Cordero de Dios",artist:"Fracción del Pan",badge:"Comunión",lyrics:`<div class="lyric-section"><span class="lyric-line bold">Cordero de Dios,</span><span class="lyric-line bold">que quitas el pecado del mundo,</span><span class="lyric-line bold">ten piedad de nosotros.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line bold">Cordero de Dios,</span><span class="lyric-line bold">que quitas el pecado del mundo,</span><span class="lyric-line bold">danos la paz.</span></div>`},
+    {title:"Ven, Espíritu Santo",artist:"Comunión",badge:"Comunión",lyrics:`<div class="lyric-section"><span class="lyric-line">Ven, Espíritu Santo,</span><span class="lyric-line">llena los corazones de tus fieles</span><span class="lyric-line">y enciende en ellos el fuego de tu amor.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-misa">Estribillo</span><span class="lyric-line bold">Envía tu Espíritu, Señor,</span><span class="lyric-line bold">y serán creadas todas las cosas,</span><span class="lyric-line bold">y renovarás la faz de la tierra.</span></div>`},
+    {title:"Amad como yo os amé",artist:"Mandamiento Nuevo",badge:"Comunión",lyrics:`<div class="lyric-section"><span class="lyric-line">Os doy un mandamiento nuevo:</span><span class="lyric-line">que os améis los unos a los otros.</span><span class="lyric-line">Como yo os he amado,</span><span class="lyric-line">amad también vosotros a los demás.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line">Si os ponéis en camino,</span><span class="lyric-line">sirviendo siempre a la verdad,</span><span class="lyric-line">frutos daréis en abundancia.</span><span class="lyric-line">Mi amor se manifestará.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line">No veréis amor tan grande</span><span class="lyric-line">como aquel que os mostré.</span><span class="lyric-line">Yo doy la vida por vosotros.</span><span class="lyric-line">Amad como yo os amé.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line">Si hacéis lo que os mando</span><span class="lyric-line">y os queréis de corazón,</span><span class="lyric-line">compartiréis mi pleno gozo</span><span class="lyric-line">de amar como Él me amó.</span></div>`},
+    {title:"Panis Angelicus",artist:"César Franck",badge:"Comunión",lyrics:`<div class="bilingual-block"><div><span class="lang-label">Latín</span><span class="lyric-line">Panis angelicus</span><span class="lyric-line">Fit panis hominum</span><span class="lyric-line">Dat panis coelicus</span><span class="lyric-line">Figuris terminum</span><span class="lyric-line">O res mirabilis</span><span class="lyric-line">Manducat Dominum</span><span class="lyric-line">Pauper, servus et humilis</span></div><div><span class="lang-label">Español</span><span class="lyric-line">Pan de los ángeles</span><span class="lyric-line">Se hace pan de los hombres</span><span class="lyric-line">Da pan celestial</span><span class="lyric-line">Para todos los fieles</span><span class="lyric-line">Oh cosa maravillosa</span><span class="lyric-line">El pobre come al Señor</span><span class="lyric-line">Pobre, siervo y humilde</span></div></div>`},
+    {title:"Alma Misionera",artist:"Enrique García",badge:"Final",lyrics:`<div class="lyric-section"><span class="lyric-line">Señor, toma mi vida nueva,</span><span class="lyric-line">antes de que la espera</span><span class="lyric-line">desgaste años en mí</span><span class="lyric-line">estoy dispuesta a lo que quieras</span><span class="lyric-line">no importa lo que sea</span><span class="lyric-line">Tú llámame a servir</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-section-label lsl-misa">Estribillo</span><span class="lyric-line bold">Llévame donde los hombres</span><span class="lyric-line bold">necesiten tus palabras</span><span class="lyric-line bold">necesiten mis ganas de vivir</span><span class="lyric-line bold">donde falte la esperanza</span><span class="lyric-line bold">donde falte la alegría</span><span class="lyric-line bold">simplemente por no saber de ti.</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line">Te doy mi corazón sincero</span><span class="lyric-line">para gritar sin miedo</span><span class="lyric-line">Tu grandeza, Señor</span><span class="lyric-line">Tendré mis manos sin cansancio</span><span class="lyric-line">tu historia entre los labios</span><span class="lyric-line">y fuerza en la oración</span></div><div class="lyric-sep"><div class="lyric-sep-dot dot-misa"></div></div><div class="lyric-section"><span class="lyric-line">Y así en marcha iré cantando</span><span class="lyric-line">por calles predicando</span><span class="lyric-line">lo bello que es tu amor</span><span class="lyric-line">Señor tengo alma misionera</span><span class="lyric-line">condúceme a la tierra</span><span class="lyric-line">que tenga sed de Dios.</span></div>`}
+  ]
+};
+
+let currentSection=null, currentSongIndex=0, doneSongs={};
+
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function openSection(sec){
+  currentSection=sec;
+  doneSongs[sec]=doneSongs[sec]||{};
+  const isMisa=sec==='misa';
+  document.getElementById('list-title').textContent=isMisa?'Santa Misa':'Adoración Eucarística';
+  document.getElementById('list-subtitle').textContent=isMisa?'Hora Santa · Pascua Juvenil 2026':'Santísimo · Pascua Juvenil 2026';
+  document.getElementById('progress-fill').className='progress-fill '+(isMisa?'pf-misa':'pf-adoracion');
+  renderSongList();
+  showView('song-list');
+  updateProgress();
+}
+
+function renderSongList(){
+  const songs=SONGS[currentSection],isMisa=currentSection==='misa',done=doneSongs[currentSection]||{};
+  document.getElementById('songs-container').innerHTML=songs.map((s,i)=>`
+    <div class="song-item ${done[i]?'done':''}" onclick="openSong(${i})">
+      <span class="song-num">${i+1}</span>
+      <div class="song-info">
+        <p class="song-title-sm">${s.title}</p>
+        <p class="song-artist-sm">${s.artist}</p>
+      </div>
+      <span class="song-badge ${isMisa?'badge-misa':'badge-adoracion'}">${s.badge}</span>
+      <div class="song-check">${done[i]?'✓':''}</div>
+    </div>`).join('');
+}
+
+function updateProgress(){
+  const songs=SONGS[currentSection],done=Object.keys(doneSongs[currentSection]||{}).length,pct=(done/songs.length)*100;
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-label').textContent=done+' de '+songs.length+' vistos';
+}
+
+function openSong(index){
+  currentSongIndex=index;
+  const song=SONGS[currentSection][index],isMisa=currentSection==='misa';
+  document.getElementById('view-title').textContent=song.title;
+  document.getElementById('view-artist').textContent=song.artist;
+  const badge=document.getElementById('view-badge');
+  badge.textContent=song.badge.toUpperCase();
+  badge.className='song-badge-view '+(isMisa?'badge-misa':'badge-adoracion');
+  document.getElementById('song-counter').textContent=(index+1)+' / '+SONGS[currentSection].length;
+  document.getElementById('prev-btn').disabled=index===0;
+  const nb=document.getElementById('next-btn');
+  nb.disabled=index===SONGS[currentSection].length-1;
+  nb.className='nav-btn '+(isMisa?'next-misa':'next-adoracion');
+  const body=document.getElementById('lyrics-body');
+  body.innerHTML=song.lyrics;
+  body.scrollTop=0;
+  document.getElementById('read-progress-fill').className='read-progress-fill '+(isMisa?'rpf-misa':'rpf-adoracion');
+  document.getElementById('read-progress-fill').style.width='0%';
+  updateMarkBtn();
+  document.getElementById('mark-cta').classList.add('visible');
+  showView('song-view');
+}
+
+function updateMarkBtn(){
+  const isMisa=currentSection==='misa',isDone=!!(doneSongs[currentSection]&&doneSongs[currentSection][currentSongIndex]);
+  const btn=document.getElementById('mark-btn'),label=document.getElementById('mark-btn-label'),icon=document.getElementById('mark-btn-icon');
+  if(isDone){
+    btn.className='mark-btn mb-done';
+    label.textContent='Cantado ✓';
+    icon.textContent='✓';
+  }else{
+    btn.className='mark-btn '+(isMisa?'mb-misa':'mb-adoracion');
+    label.textContent='Marcar como cantado';
+    icon.textContent='♪';
+  }
+}
+
+function toggleDone(){
+  doneSongs[currentSection]=doneSongs[currentSection]||{};
+  doneSongs[currentSection][currentSongIndex]=true;
+  updateMarkBtn();
+  updateProgress();
+}
+
+function onLyricsScroll(){
+  const el=document.getElementById('lyrics-body'),s=el.scrollHeight-el.clientHeight;
+  if(s<=0)return;
+  const pct=Math.min(100,(el.scrollTop/s)*100);
+  document.getElementById('read-progress-fill').style.width=pct+'%';
+  if(pct>=88&&!(doneSongs[currentSection]&&doneSongs[currentSection][currentSongIndex])){
+    doneSongs[currentSection]=doneSongs[currentSection]||{};
+    doneSongs[currentSection][currentSongIndex]=true;
+    updateMarkBtn();
+    updateProgress();
+  }
+}
+
+function prevSong(){
+  if(currentSongIndex>0)openSong(currentSongIndex-1);
+}
+
+function nextSong(){
+  if(currentSongIndex<SONGS[currentSection].length-1)openSong(currentSongIndex+1);
+}
+
+function goList(){
+  renderSongList();
+  updateProgress();
+  document.getElementById('mark-cta').classList.remove('visible');
+  showView('song-list');
+}
+
+function goHome(){
+  document.getElementById('mark-cta').classList.remove('visible');
+  showView('splash');
+}
+
+let touchX=0;
+document.getElementById('song-view').addEventListener('touchstart',e=>{touchX=e.touches[0].clientX;},{passive:true});
+document.getElementById('song-view').addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchX;
+  if(Math.abs(dx)>55){if(dx<0)nextSong();else prevSong();}
+});
+</script>
+
+</body>
+</html>
